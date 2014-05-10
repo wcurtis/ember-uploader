@@ -13,6 +13,14 @@ Ember.Uploader = Ember.Object.extend(Ember.Evented, {
    */
   type: 'POST',
 
+  /**
+   * Name of property in form data containing
+   * the file
+   * 
+   * @property type
+   */
+  filePropertyName: 'file',
+
   upload: function(file) {
     var data = this.setupFormData(file);
     var url  = get(this, 'url');
@@ -36,7 +44,7 @@ Ember.Uploader = Ember.Object.extend(Ember.Evented, {
       }
     }
 
-    data.append('file', file);
+    data.append(get(this, 'filePropertyName'), file);
 
     return data;
   },
